@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:jms="http://www.springframework.org/schema/jms"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd">
+
+  <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"
+    p:brokerURL="tcp://localhost:61616" />
+  
+  <bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+    <constructor-arg value="FOO.TEST" />
+  </bean>
+    
+  <bean id="replyToDestination" class="org.apache.activemq.command.ActiveMQQueue">
+    <constructor-arg value="FOO.TEST.REPLY" />
+  </bean>
+    
+  <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate"
+    p:connectionFactory-ref="connectionFactory"
+    p:defaultDestination-ref="destination" />
+  
+  <bean id="messageProducer" class="org.bsnyder.spring.jms.producer.SimpleMessageProducer"
+    p:jmsTemplate-ref="jmsTemplate" p:replyToDestination-ref="replyToDestination" />
+    
+  <bean id="messageListener" class="org.bsnyder.spring.jms.listener.SimpleMessageListener" />
+    
+  <jms:listener-container concurrency="5-10">
+    <jms:listener destination="FOO.TEST.REPLY" ref="messageListener"/>
+  </jms:listener-container>
+  
+</beans>

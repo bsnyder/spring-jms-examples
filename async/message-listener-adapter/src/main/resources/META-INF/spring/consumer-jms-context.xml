@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:jms="http://www.springframework.org/schema/jms"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd">
+
+  <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"
+    p:brokerURL="tcp://localhost:61616" />
+  
+  <bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+    <constructor-arg value="FOO.TEST" />
+  </bean>
+    
+  <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate"
+    p:connectionFactory-ref="connectionFactory"
+    p:defaultDestination-ref="destination" />
+  
+    <bean id="messageListener" 
+    class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+    <constructor-arg>
+      <bean class="org.bsnyder.spring.jms.adapter.MessageDelegateImpl" />
+    </constructor-arg>
+    <!-- 
+      It is very important to set the messageConverter to null when handling the 
+      raw JMS message types. This allows the raw messages to be passed along. 
+     -->
+    <property name="messageConverter"> 
+      <null/> 
+    </property>
+  </bean>
+  
+  <!-- 
+    This is the Spring DefaultMessageListenerContainer (DMLC). All default values 
+    for the DMLC are used except for concurrency; By default the DMLC knows to use the 
+    bean whose name is connectionFactory.
+  -->
+  <jms:listener-container concurrency="5-10">
+    <jms:listener destination="FOO.TEST" ref="messageListener"/>
+  </jms:listener-container>
+
+</beans>

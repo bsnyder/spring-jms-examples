@@ -1,0 +1,16 @@
+# For STS/Eclipse 
+.classpath
+.project
+.settings
+.springBeans
+Servers 
+bin
+
+# Maven 
+target
+
+# For Mac OS X 
+.DS_Store 
+
+# Logging 
+*.log
