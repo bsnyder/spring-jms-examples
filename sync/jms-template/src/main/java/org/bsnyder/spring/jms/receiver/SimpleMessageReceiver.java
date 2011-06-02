@@ -20,9 +20,22 @@ public class SimpleMessageReceiver {
 		this.jmsTemplate = jmsTemplate;
 	}
 
-	public void receive() {
+	public void receive(String receiveType) {
+		if ("jmsReceive".equalsIgnoreCase(receiveType)) {
+			jmsReceive();
+		} else if ("receiveAndConvert".equalsIgnoreCase(receiveType)) {
+			receiveAndConvert();
+		}
+	}
+	
+	public void jmsReceive() {
 		Message message = jmsTemplate.receive();
-		LOG.debug("Received message: {}", message);
+		LOG.debug("Received a JMS message: {}", message);
     }
+	
+	public void receiveAndConvert() {
+		String message = (String) jmsTemplate.receiveAndConvert();
+		LOG.debug("Received a text message: {}", message);
+	}
 
 }

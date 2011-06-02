@@ -76,6 +76,9 @@
             </executions>
             <configuration>
               <mainClass>org.bsnyder.spring.jms.ConsumerApp</mainClass>
+              <arguments>
+                <argument>${receiveType}</argument>
+              </arguments>
             </configuration>
           </plugin>
         </plugins>
@@ -97,6 +100,9 @@
             </executions>
             <configuration>
               <mainClass>org.bsnyder.spring.jms.ProducerApp</mainClass>
+              <arguments>
+                <argument>${sendType}</argument>
+              </arguments>
             </configuration>
           </plugin>
         </plugins>

@@ -16,7 +16,8 @@
     
   <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate"
     p:connectionFactory-ref="connectionFactory"
-    p:defaultDestination-ref="destination" />
+    p:defaultDestination-ref="destination" 
+    p:receiveTimeout="1000" />
   
   <bean id="messageReceiver" class="org.bsnyder.spring.jms.receiver.SimpleMessageReceiver"
     p:jmsTemplate-ref="jmsTemplate" />

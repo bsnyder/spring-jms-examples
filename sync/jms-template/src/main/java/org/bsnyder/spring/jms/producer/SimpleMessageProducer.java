@@ -32,10 +32,27 @@ public class SimpleMessageProducer {
 		this.jmsTemplate = jmsTemplate;
 	}
 
-	public void sendMessages() throws JMSException {
+	public void sendMessages(String sendType) throws JMSException {
+		if ("jmsSend".equalsIgnoreCase(sendType)) {
+			jmsSendMessages();
+		} else if ("convertAndSend".equalsIgnoreCase(sendType)) {
+			convertAndSendMessages();
+		}
+	}
+	
+	public void convertAndSendMessages() throws JMSException {
         final StringBuilder buffer = new StringBuilder(); 
         
         for (int i = 0; i < numberOfMessages; ++i) {
+            buffer.append("Message '").append(i).append("' sent at: ").append(new Date());
+            jmsTemplate.convertAndSend(buffer.toString());
+        }
+    }
+	
+	public void jmsSendMessages() throws JMSException {
+        final StringBuilder buffer = new StringBuilder(); 
+        
+		for (int i = 0; i < numberOfMessages; ++i) {
             buffer.append("Message '").append(i).append("' sent at: ").append(new Date());
             
             final int count = i;
@@ -50,5 +67,6 @@ public class SimpleMessageProducer {
                 }
             });
         }
-    }
+	}
+	
 }

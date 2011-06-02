@@ -27,9 +27,16 @@ public class ProducerApp {
      * @throws JMSException
      */
     public static void main(String[] args) throws JMSException {
+    	String sendType = null;
+    	
+    	if (args.length > 0 && null != args[0] && !"".equals(args[0])) {
+    		sendType = args[0];
+    	}
+    	
     	ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/spring/producer-jms-context.xml", ProducerApp.class);
         SimpleMessageProducer producer = (SimpleMessageProducer) context.getBean("messageProducer");
-        producer.sendMessages();
+        LOG.debug("Using the '{}' sendType", sendType);
+        producer.sendMessages(sendType);
     }
     
 }

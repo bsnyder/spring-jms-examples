@@ -27,11 +27,18 @@ public class ConsumerApp {
      * @throws JMSException
      */
     public static void main(String[] args) throws JMSException {
-    	ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/spring/consumer-jms-context.xml", ConsumerApp.class);
+    	String receiveType = null;
     	
+    	if (args.length > 0 && null != args[0] && !"".equals(args[0])) {
+    		receiveType = args[0];
+    	}
+    	
+    	ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/spring/consumer-jms-context.xml", ConsumerApp.class);
     	SimpleMessageReceiver receiver = context.getBean(SimpleMessageReceiver.class);
+        LOG.debug("Using the '{}' receiveType", receiveType);
+        
     	for (int i = 0; i < 100; ++i) {
-    		receiver.receive();
+    		receiver.receive(receiveType);
     	}
     }
     
