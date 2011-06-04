@@ -7,12 +7,12 @@ import javax.jms.TextMessage;
 
 public interface MessageDelegate {
 
-    public abstract void handleMessage(TextMessage message);
+    public abstract void processMessage(TextMessage message);
 
-    public abstract void handleMessage(BytesMessage message);
+    public abstract void processMessage(BytesMessage message);
 
-    public abstract void handleMessage(MapMessage message);
+    public abstract void processMessage(MapMessage message);
 
-    public abstract void handleMessage(ObjectMessage message);
+    public abstract void processMesage(ObjectMessage message);
 
 }

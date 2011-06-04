@@ -18,8 +18,9 @@
     p:connectionFactory-ref="connectionFactory"
     p:defaultDestination-ref="destination" />
   
-    <bean id="messageListener" 
-    class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+  <bean id="messageDelegate" 
+    class="org.springframework.jms.listener.adapter.MessageListenerAdapter"
+    p:defaultListenerMethod="processMessage">
     <constructor-arg>
       <bean class="org.bsnyder.spring.jms.adapter.MessageDelegateImpl" />
     </constructor-arg>
@@ -32,13 +33,22 @@
     </property>
   </bean>
   
+  <bean id="messageDelegate2" 
+    class="org.springframework.jms.listener.adapter.MessageListenerAdapter" 
+    p:defaultListenerMethod="processMessage">
+    <constructor-arg>
+      <bean class="org.bsnyder.spring.jms.adapter.MessageDelegate2Impl" />
+    </constructor-arg>
+  </bean>
+  
   <!-- 
     This is the Spring DefaultMessageListenerContainer (DMLC). All default values 
     for the DMLC are used except for concurrency; By default the DMLC knows to use the 
     bean whose name is connectionFactory.
   -->
   <jms:listener-container concurrency="5-10">
-    <jms:listener destination="FOO.TEST" ref="messageListener"/>
+    <jms:listener destination="FOO.TEST" ref="messageDelegate" />
+    <jms:listener destination="FOO.TEST2" ref="messageDelegate" />
   </jms:listener-container>
 
 </beans>

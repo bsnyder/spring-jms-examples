@@ -96,9 +96,9 @@
               </execution>
             </executions>
             <configuration>
-            <!-- TODO: Figure out how to pass in an arg to determine message type to send. -->
               <mainClass>org.bsnyder.spring.jms.ProducerApp</mainClass>
               <arguments>
+                <argument>${destinationName}</argument>
                 <argument>${messageType}</argument>
               </arguments>
             </configuration>

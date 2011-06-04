@@ -13,7 +13,7 @@ public class MessageDelegateImpl implements MessageDelegate {
     
     private static final Logger LOG = LoggerFactory.getLogger(MessageDelegateImpl.class);
     
-    public void handleMessage(TextMessage message) {
+    public void processMessage(TextMessage message) {
         try {
             LOG.info("Consumed text message number {}", message.getIntProperty("messageCount"));
         } catch (JMSException e) {
@@ -21,7 +21,7 @@ public class MessageDelegateImpl implements MessageDelegate {
         }
     }
     
-    public void handleMessage(BytesMessage message) {
+    public void processMessage(BytesMessage message) {
         try {
             LOG.info("Consumed bytes message number {}", message.getIntProperty("messageCount"));
         } catch (JMSException e) {
@@ -29,7 +29,7 @@ public class MessageDelegateImpl implements MessageDelegate {
         }
     }
     
-    public void handleMessage(MapMessage message) {
+    public void processMessage(MapMessage message) {
         try {
             LOG.info("Consumed map message number {}", message.getIntProperty("messageCount"));
         } catch (JMSException e) {
@@ -37,7 +37,7 @@ public class MessageDelegateImpl implements MessageDelegate {
         }
     }
     
-    public void handleMessage(ObjectMessage message) {
+    public void processMesage(ObjectMessage message) {
         try {
             LOG.info("Consumed object message number {}", message.getIntProperty("messageCount"));
         } catch (JMSException e) {

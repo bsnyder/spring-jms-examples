@@ -35,19 +35,19 @@ public class MessageProducer {
 		this.jmsTemplate = jmsTemplate;
 	}
 	
-	public void sendMessages(String messageType) throws JMSException {
+	public void sendMessages(String destinationName, String messageType) throws JMSException {
 		if ("text".equalsIgnoreCase(messageType)) {
-			sendTextMessages();
+			sendTextMessages(destinationName);
 		} else if ("bytes".equalsIgnoreCase(messageType)) {
-			sendBytesMessages();
+			sendBytesMessages(destinationName);
 		} else if ("map".equalsIgnoreCase(messageType)) {
-			sendMapMessages();
+			sendMapMessages(destinationName);
 		} else if ("object".equalsIgnoreCase(messageType)) {
-			sendObjectMessages();
+			sendObjectMessages(destinationName);
 		}
 	}
 
-	public void sendTextMessages() throws JMSException {
+	public void sendTextMessages(String destinationName) throws JMSException {
         final StringBuilder buffer = new StringBuilder(); 
         
         for (int i = 0; i < numberOfMessages; ++i) {
@@ -56,7 +56,7 @@ public class MessageProducer {
             final int count = i;
             final String payload = buffer.toString();
             
-            jmsTemplate.send(new MessageCreator() {
+            jmsTemplate.send(destinationName, new MessageCreator() {
                 public Message createMessage(Session session) throws JMSException {
                     TextMessage message = session.createTextMessage(payload); 
                     message.setIntProperty("messageCount", count);
@@ -67,7 +67,7 @@ public class MessageProducer {
         }
     }
 	
-	public void sendBytesMessages() throws JMSException {
+	public void sendBytesMessages(String destinationName) throws JMSException {
         final StringBuilder buffer = new StringBuilder(); 
         
         for (int i = 0; i < numberOfMessages; ++i) {
@@ -76,7 +76,7 @@ public class MessageProducer {
             final int count = i;
             final String payload = buffer.toString();
             
-            jmsTemplate.send(new MessageCreator() {
+            jmsTemplate.send(destinationName, new MessageCreator() {
                 public Message createMessage(Session session) throws JMSException {
                     BytesMessage message = session.createBytesMessage();
                     message.writeUTF(payload);
@@ -88,7 +88,7 @@ public class MessageProducer {
         }
     }
 	
-	public void sendMapMessages() throws JMSException {
+	public void sendMapMessages(String destinationName) throws JMSException {
         final StringBuilder buffer = new StringBuilder(); 
         
         for (int i = 0; i < numberOfMessages; ++i) {
@@ -97,7 +97,7 @@ public class MessageProducer {
             final int count = i;
             final String payload = buffer.toString();
             
-            jmsTemplate.send(new MessageCreator() {
+            jmsTemplate.send(destinationName, new MessageCreator() {
                 public Message createMessage(Session session) throws JMSException {
                     MapMessage message = session.createMapMessage(); 
                     message.setString("payload", payload);
@@ -109,7 +109,7 @@ public class MessageProducer {
         }
     }
 	
-	public void sendObjectMessages() throws JMSException {
+	public void sendObjectMessages(String destinationName) throws JMSException {
         final StringBuilder buffer = new StringBuilder(); 
         
         for (int i = 0; i < numberOfMessages; ++i) {
@@ -119,7 +119,7 @@ public class MessageProducer {
             final String payloadStr = buffer.toString();
             final Payload payload = new Payload(payloadStr);
             
-            jmsTemplate.send(new MessageCreator() {
+            jmsTemplate.send(destinationName, new MessageCreator() {
                 public Message createMessage(Session session) throws JMSException {
                     ObjectMessage message = session.createObjectMessage(payload);
                     message.setIntProperty("messageCount", count);
