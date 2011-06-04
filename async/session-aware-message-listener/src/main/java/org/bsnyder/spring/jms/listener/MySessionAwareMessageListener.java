@@ -21,15 +21,14 @@ public class MySessionAwareMessageListener implements SessionAwareMessageListene
         try {
             LOG.info("Received message: {}", ((TextMessage)message).getText());
             
+            // Send a reply message 
             StringBuilder buffer = new StringBuilder("Reply message sent at: ").append(new Date());
-            
             TextMessage newMessage = session.createTextMessage(buffer.toString());
             MessageProducer producer =  session.createProducer(message.getJMSReplyTo());
             LOG.info("Sending reply message");
             producer.send(newMessage);
         } catch (JMSException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
 		
 	}

@@ -16,8 +16,7 @@ public class SimpleMessageListener implements MessageListener {
         try {
             LOG.info("Received reply message: {}", ((TextMessage)message).getText());
         } catch (JMSException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
 
