@@ -4,14 +4,14 @@
   xmlns:jms="http://www.springframework.org/schema/jms"
   xmlns:p="http://www.springframework.org/schema/p"
   xsi:schemaLocation="
-    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd">
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd">
 
   <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"
     p:brokerURL="tcp://localhost:61616" />
   
   <bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
-    <constructor-arg value="FOO.TEST" />
+    <constructor-arg value="TEST.FOO" />
   </bean>
     
   <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate"
@@ -26,7 +26,7 @@
     bean whose name is connectionFactory.
   -->
   <jms:listener-container concurrency="5-10">
-    <jms:listener destination="FOO.TEST" ref="messageListener"/>
+    <jms:listener destination="TEST.FOO" ref="messageListener"/>
   </jms:listener-container>
 
 </beans>
