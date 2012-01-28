@@ -18,8 +18,8 @@
   </modules>
 
   <properties>
-  	<activemq-version>5.5.1</activemq-version>
-  	<junit-version>4.8</junit-version>
+    <activemq-version>5.5.1</activemq-version>
+    <junit-version>4.8</junit-version>
     <log4j-version>1.2.13</log4j-version>
     <maven-compiler-plugin-version>2.3.2</maven-compiler-plugin-version>
     <maven-exec-plugin-version>1.2</maven-exec-plugin-version>
