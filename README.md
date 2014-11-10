@@ -82,7 +82,7 @@ convertAndSend and also a jmsSend. These two types are specified using an
 argument when starting up the producer as shown below: 
 
     $ cd ./sync/jms-template
-    $ mvn -Pproducer exec:java -DsendType=converAndSend
+    $ mvn -Pproducer exec:java -DsendType=convertAndSend
 
 Summary
 -------
