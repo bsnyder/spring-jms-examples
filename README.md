@@ -25,22 +25,22 @@ asynchronous examples.
 
 #### Run the Producer for the `MessageListener` Example ####
 
-    $ cd ./async/message-listener
+    $ cd ./async/message-listener-adapter
     $ mvn -Pproducer exec:java
 
 #### Run the Consumer for the `MessageListener` Example ####
 
-    $ cd ./async/message-listener
+    $ cd ./async/message-listener-adapter
     $ mvn -Pconsumer exec:java
 
 #### Run the Producer for the `SessionAwareMessageListener` Example ####
 
-    $ cd ./async/message-listener
+    $ cd ./async/message-listener-adapter
     $ mvn -Pproducer exec:java
 
 #### Run the Consumer for the `SessionAwareMessageListener` Example ####
 
-    $ cd ./async/message-listener
+    $ cd ./async/message-listener-adapter
     $ mvn -Pconsumer exec:java
 
 #### Run the Producer for the `MessageListenerAdapter` Example ####
@@ -49,7 +49,7 @@ destination name and the second one for the message type. The destination name
 should be either FOO.TEST or FOO.TEST2. The message type should text, bytes,
 map or object. Below is an example of text: 
 
-    $ cd ./async/message-listener
+    $ cd ./async/message-listener-adapter
     $ mvn -Pproducer exec:java -Dexec.args="FOO.TEST2 text"
 
 These arguments allow you to invoke one of two `MessageListenerAdapter`
@@ -57,7 +57,7 @@ examples and to send four different types of messages.
 
 #### Run the Consumer for the `MessageListenerAdapter` Example ####
 
-    $ cd ./async/message-listener
+    $ cd ./async/message-listener-adapter
     $ mvn -Pconsumer exec:java
 
 
