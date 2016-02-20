@@ -21,10 +21,20 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>activemq-core</artifactId>
-    </dependency>
+	<dependency>
+		<groupId>org.apache.activemq</groupId>
+		<artifactId>activemq-client</artifactId>
+		<version>5.10.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.jboss.spec.javax.jms</groupId>
+		<artifactId>jboss-jms-api_1.1_spec</artifactId>
+		<version>1.0.1.Final</version>
+	</dependency>    
+<!--     <dependency> -->
+<!--       <groupId>org.apache.activemq</groupId> -->
+<!--       <artifactId>activemq-core</artifactId> -->
+<!--     </dependency> -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
