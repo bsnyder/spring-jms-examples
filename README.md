@@ -34,6 +34,7 @@ asynchronous examples.
     $ mvn -Pconsumer exec:java
 
 #### Run the Producer for the `SessionAwareMessageListener` Example ####
+hi
 
     $ cd ./async/message-listener-adapter
     $ mvn -Pproducer exec:java
