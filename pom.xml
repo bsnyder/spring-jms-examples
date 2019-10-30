@@ -24,7 +24,7 @@
     <maven-compiler-plugin-version>2.3.2</maven-compiler-plugin-version>
     <maven-exec-plugin-version>1.2</maven-exec-plugin-version>
     <slf4j-version>1.6.1</slf4j-version>
-    <spring-version>3.0.5.RELEASE</spring-version>
+    <spring-version>5.2.0.RELEASE</spring-version>
   </properties>
 
   <dependencyManagement>
